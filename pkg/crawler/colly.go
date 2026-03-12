@@ -113,6 +113,7 @@ func New(scan *Scan) *Results {
 		Debug:        scan.Debug,
 		JSON:         scan.JSON,
 		IgnoreSlice:  ignoreSlice,
+		SubdomainDepth: scan.SubdomainDepth,
 		URLs:         &results.URLs,
 	}
 
@@ -453,7 +454,7 @@ func visitXMLLink(link string, event *Event, e *colly.XMLElement, c *colly.Colle
 // visitLink is a protocol agnostic wrapper to visit a link.
 func visitLink(event *Event, c *colly.Collector, absoluteURL string) {
 	if (!event.Intensive && urlUtils.SameDomain(event.ProtocolTemp+"://"+event.Target, absoluteURL)) ||
-		(event.Intensive && intensiveOk(event.TargetTemp, absoluteURL, event.Debug)) {
+		(event.Intensive && intensiveOk(event.TargetTemp, absoluteURL, event.Debug, event.SubdomainDepth)) {
 		if !event.Ignore || (event.Ignore && !IgnoreMatch(absoluteURL, &event.IgnoreSlice)) {
 			err := c.Visit(absoluteURL)
 			if err != nil && event.Debug {

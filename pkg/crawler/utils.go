@@ -56,8 +56,9 @@ func IgnoreMatch(url string, ignoreSlice *[]string) bool {
 
 // intensiveOk checks if a given url can be crawled
 // in intensive mode (if the 2nd level domain matches with
-// the inputted target).
-func intensiveOk(target string, urlInput string, debug bool) bool {
+// the inputted target). If maxSubdomainDepth > 0, it limits
+// how many subdomain labels are allowed.
+func intensiveOk(target string, urlInput string, debug bool, maxSubdomainDepth int) bool {
 	root, err := urlUtils.GetRootHost(urlInput)
 	if err != nil {
 		if debug {
@@ -67,5 +68,50 @@ func intensiveOk(target string, urlInput string, debug bool) bool {
 		return false
 	}
 
-	return root == target
+	if root != target {
+		return false
+	}
+
+	if maxSubdomainDepth <= 0 {
+		return true
+	}
+
+	host := urlUtils.GetHost(urlInput)
+	if host == "" {
+		if debug {
+			fmt.Println("unable to parse host: " + urlInput)
+		}
+		return false
+	}
+
+	host = urlUtils.RemovePort(host)
+	depth, ok := subdomainDepth(host, target)
+	if !ok {
+		if debug {
+			fmt.Println("unable to determine subdomain depth: " + urlInput)
+		}
+		return false
+	}
+
+	return depth <= maxSubdomainDepth
+}
+
+// subdomainDepth returns the number of labels before the root domain.
+// Example: host "a.b.example.com" with root "example.com" => depth 2.
+func subdomainDepth(host string, root string) (int, bool) {
+	if host == root {
+		return 0, true
+	}
+
+	if !strings.HasSuffix(host, "."+root) {
+		return 0, false
+	}
+
+	hostParts := strings.Split(host, ".")
+	rootParts := strings.Split(root, ".")
+	if len(hostParts) < len(rootParts) {
+		return 0, false
+	}
+
+	return len(hostParts) - len(rootParts), true
 }

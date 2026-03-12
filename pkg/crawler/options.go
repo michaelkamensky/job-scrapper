@@ -69,6 +69,7 @@ type Scan struct {
 	Concurrency int
 	Delay       int
 	Jitter      int
+	SubdomainDepth int
 	Timeout     int
 
 	// Storage
@@ -85,5 +86,6 @@ type Event struct {
 	Debug        bool
 	JSON         bool
 	IgnoreSlice  []string
+	SubdomainDepth int
 	URLs         *[]string
 }

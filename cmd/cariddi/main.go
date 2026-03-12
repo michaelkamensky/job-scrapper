@@ -71,6 +71,7 @@ func main() {
 		Delay:            flags.Delay,
 		Concurrency:      flags.Concurrency,
 		Jitter:           flags.Jitter,
+		SubdomainDepth:   flags.SubdomainDepth,
 		Ignore:           flags.Ignore,
 		IgnoreTxt:        flags.IgnoreTXT,
 		Cache:            flags.Cache,

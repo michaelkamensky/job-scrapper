@@ -40,6 +40,8 @@ func PrintHelp() {
 		Delay between a page crawled and another.
 	-j int
 		Random delay added to each request (in seconds).
+	-sd int
+		Maximum subdomain depth when -intensive is enabled.
 	-debug
 		Print debug information while crawling.
 	-e	Hunt for juicy endpoints.

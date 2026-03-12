@@ -47,6 +47,8 @@ type Input struct {
 	Concurrency int
 	// Jitter adds a random delay between requests (in seconds).
 	Jitter int
+	// SubdomainDepth limits subdomain depth when intensive mode is enabled.
+	SubdomainDepth int
 	// Help prints the help banner.
 	Help bool
 	// Examples prints the examples banner.
@@ -112,6 +114,7 @@ func ScanFlag() Input {
 	delayPtr := flag.Int("d", 0, "Delay between a page crawled and another.")
 	concurrencyPtr := flag.Int("c", DefaultConcurrency, "Concurrency level.")
 	jitterPtr := flag.Int("j", 0, "Random delay added to each request (in seconds).")
+	subdomainDepthPtr := flag.Int("sd", 0, "Maximum subdomain depth when -intensive is enabled.")
 	helpPtr := flag.Bool("h", false, "Print the help.")
 	examplesPtr := flag.Bool("examples", false, "Print the examples.")
 	plainPtr := flag.Bool("plain", false, "Print only results.")
@@ -169,6 +172,7 @@ func ScanFlag() Input {
 		*delayPtr,
 		*concurrencyPtr,
 		*jitterPtr,
+		*subdomainDepthPtr,
 		*helpPtr,
 		*examplesPtr,
 		*plainPtr,
