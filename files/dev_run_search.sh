@@ -1,6 +1,8 @@
 #!/bin/bash
 source ./utils/career_site_filter.sh
 
+./clean.sh
+
 DATE=$(date +%Y-%m-%d)
 mkdir $DATE
 
