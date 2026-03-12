@@ -68,6 +68,7 @@ type Scan struct {
 	// Settings
 	Concurrency int
 	Delay       int
+	Jitter      int
 	Timeout     int
 
 	// Storage

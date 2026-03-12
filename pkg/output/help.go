@@ -38,6 +38,8 @@ func PrintHelp() {
 		Use the .cariddi_cache folder as cache.
 	-d int
 		Delay between a page crawled and another.
+	-j int
+		Random delay added to each request (in seconds).
 	-debug
 		Print debug information while crawling.
 	-e	Hunt for juicy endpoints.

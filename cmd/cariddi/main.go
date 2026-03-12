@@ -70,6 +70,7 @@ func main() {
 	config := &crawler.Scan{
 		Delay:            flags.Delay,
 		Concurrency:      flags.Concurrency,
+		Jitter:           flags.Jitter,
 		Ignore:           flags.Ignore,
 		IgnoreTxt:        flags.IgnoreTXT,
 		Cache:            flags.Cache,

@@ -145,6 +145,7 @@ Default: png, svg, jpg, jpeg, bmp, jfif, gif, webp, woff, woff2, ttf, tiff, tif 
 
 - `cat urls.txt | cariddi -proxy http://127.0.0.1:8080` (Set a Proxy, http and socks5 supported)
 - `cat urls.txt | cariddi -d 2` (2 seconds between a page crawled and another)
+- `cat urls.txt | cariddi -j 3` (Add up to 3 seconds random jitter per request)
 - `cat urls.txt | cariddi -c 200` (Set the concurrency level to 200)
 - `cat urls.txt | cariddi -i forum,blog,community,open` (Ignore urls containing these words)
 - `cat urls.txt | cariddi -it ignore_file` (Ignore urls containing at least one line in the input file)
@@ -178,6 +179,8 @@ Usage of cariddi:
      Use the .cariddi_cache folder as cache.
   -d int
      Delay between a page crawled and another.
+  -j int
+     Random delay added to each request (in seconds).
   -debug
      Print debug information while crawling.
   -e Hunt for juicy endpoints.

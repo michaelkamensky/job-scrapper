@@ -100,7 +100,7 @@ func New(scan *Scan) *Results {
 	}
 
 	// crawler creation
-	c := CreateColly(scan.Delay, scan.Concurrency, scan.Timeout, scan.MaxDepth,
+	c := CreateColly(scan.Delay, scan.Jitter, scan.Concurrency, scan.Timeout, scan.MaxDepth,
 		scan.Cache, scan.Intensive, scan.Rua,
 		scan.Proxy, scan.UserAgent, scan.Target)
 
@@ -268,7 +268,7 @@ func New(scan *Scan) *Results {
 
 // CreateColly takes as input all the settings needed to instantiate
 // a new Colly Collector object and it returns this object.
-func CreateColly(delayTime, concurrency, timeout, maxDepth int,
+func CreateColly(delayTime, jitterTime, concurrency, timeout, maxDepth int,
 	cache, intensive, rua bool,
 	proxy string, userAgent string, target string) *colly.Collector {
 	c := colly.NewCollector(
@@ -281,6 +281,7 @@ func CreateColly(delayTime, concurrency, timeout, maxDepth int,
 		&colly.LimitRule{
 			Parallelism: concurrency,
 			Delay:       time.Duration(delayTime) * time.Second,
+			RandomDelay: time.Duration(jitterTime) * time.Second,
 			DomainGlob:  "*" + target,
 		},
 	)

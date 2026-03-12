@@ -54,6 +54,8 @@ func PrintExamples() {
 
 	cat urls | cariddi -d 2 (2 seconds between a page crawled and another)
 
+	cat urls | cariddi -j 3 (Add up to 3 seconds random jitter per request)
+
 	cat urls | cariddi -c 200 (Set the concurrency level to 200)
 
 	cat urls | cariddi -plain (Print only results)

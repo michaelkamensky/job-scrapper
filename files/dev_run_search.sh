@@ -9,7 +9,7 @@ mkdir $DATE
 cp $PWD/utils/clean.sh ./$DATE
 cp $PWD/sources/targets.txt ./$DATE
 cd $PWD/$DATE
-cat targets.txt | cariddi -sr -md 10 -d 100
+cat targets.txt | cariddi -sr -d 100 -intensive
 cd $PWD/output-cariddi
 filter
 #cat targets.txt | cariddi -sr -oh test2

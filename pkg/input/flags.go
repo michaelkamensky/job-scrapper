@@ -45,6 +45,8 @@ type Input struct {
 	Delay int
 	// Concurrency level.
 	Concurrency int
+	// Jitter adds a random delay between requests (in seconds).
+	Jitter int
 	// Help prints the help banner.
 	Help bool
 	// Examples prints the examples banner.
@@ -109,6 +111,7 @@ func ScanFlag() Input {
 	versionPtr := flag.Bool("version", false, "Print the version.")
 	delayPtr := flag.Int("d", 0, "Delay between a page crawled and another.")
 	concurrencyPtr := flag.Int("c", DefaultConcurrency, "Concurrency level.")
+	jitterPtr := flag.Int("j", 0, "Random delay added to each request (in seconds).")
 	helpPtr := flag.Bool("h", false, "Print the help.")
 	examplesPtr := flag.Bool("examples", false, "Print the examples.")
 	plainPtr := flag.Bool("plain", false, "Print only results.")
@@ -165,6 +168,7 @@ func ScanFlag() Input {
 		*versionPtr,
 		*delayPtr,
 		*concurrencyPtr,
+		*jitterPtr,
 		*helpPtr,
 		*examplesPtr,
 		*plainPtr,
